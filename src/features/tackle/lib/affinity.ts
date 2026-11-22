@@ -1,5 +1,5 @@
-import { fishCatalog } from "../../../shared/catalog";
-import type { BaitId, SpotId } from "../../../shared/types";
+import { fishCatalog } from "../../../shared/catalog.ts";
+import type { BaitId, SpotId } from "../../../shared/types.ts";
 export function attraction(spot: SpotId, bait: BaitId) {
   return fishCatalog
     .filter((f) => f.waters.includes(spot))

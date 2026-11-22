@@ -1,5 +1,5 @@
-import type { GameDocument, Session, Catch } from "../../../shared/types";
-import { recordCatch } from "../lib/records";
+import type { GameDocument, Session, Catch } from "../../../shared/types.ts";
+import { recordCatch } from "../lib/records.ts";
 export function landCatch(
   doc: GameDocument,
   s: Session,
@@ -12,6 +12,7 @@ export function landCatch(
     weight: s.weight,
     spot: s.spot,
     bait: s.bait,
+    rod: s.rod,
     time: now,
     duration: s.duration,
     peakTension: s.peak,

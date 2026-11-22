@@ -1,4 +1,4 @@
-import type { SpotId } from "../../../shared/types";
+import type { SpotId } from "../../../shared/types.ts";
 export interface Water {
   id: SpotId;
   name: string;

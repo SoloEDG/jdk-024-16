@@ -1,5 +1,5 @@
-import type { GameDocument } from "../../../shared/types";
-import { challenges } from "../model/challenges";
+import type { GameDocument } from "../../../shared/types.ts";
+import { challenges } from "../model/challenges.ts";
 export function challengeProgress(doc: GameDocument, id: string) {
   const c = challenges.find((c) => c.id === id);
   return c && doc.stats.catches >= c.unlockAt

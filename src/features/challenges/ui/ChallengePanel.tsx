@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Flag, Check, ChevronDown, Lock } from "lucide-react";
-import type { GameDocument } from "../../../shared/types";
-import type { Command } from "../../../shared/commands";
-import { challenges } from "../model/challenges";
-import { challengeProgress, challengeReady } from "../lib/progress";
+import type { GameDocument } from "../../../shared/types.ts";
+import type { Command } from "../../../shared/commands.ts";
+import { challenges } from "../model/challenges.ts";
+import { challengeProgress, challengeReady } from "../lib/progress.ts";
 export function ChallengePanel({
   doc,
   send,
@@ -27,7 +27,7 @@ export function ChallengePanel({
         </button>
       </div>
       <div className="challenge-list">
-        {challenges.slice(0, expanded ? 5 : 2).map((c) => {
+        {challenges.slice(0, expanded ? challenges.length : 2).map((c) => {
           const n = challengeProgress(doc, c.id);
           const claimed = doc.claimed.includes(c.id);
           const open = doc.stats.catches >= c.unlockAt;

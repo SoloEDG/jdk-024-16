@@ -1,4 +1,4 @@
-export { CollectionPanel } from "./ui/CollectionPanel";
-export { FishIllustration } from "./ui/FishIllustration";
-export { landCatch, releaseCatch } from "./model/collection";
-export { bagWeight } from "./lib/records";
+export { CollectionPanel } from "./ui/CollectionPanel.tsx";
+export { FishIllustration } from "./ui/FishIllustration.tsx";
+export { landCatch, releaseCatch } from "./model/collection.ts";
+export { bagWeight } from "./lib/records.ts";

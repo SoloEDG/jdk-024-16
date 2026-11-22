@@ -1,6 +1,6 @@
 import { Thermometer, Wind, Waves } from "lucide-react";
-import type { SpotId } from "../../../shared/types";
-import { water } from "../model/waters";
+import type { SpotId } from "../../../shared/types.ts";
+import { water } from "../model/waters.ts";
 export function WaterConditions({ spot }: { spot: SpotId }) {
   const w = water(spot);
   return (

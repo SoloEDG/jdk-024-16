@@ -1,4 +1,4 @@
-import type { FishSpecies } from "../../../shared/types";
+import type { FishSpecies } from "../../../shared/types.ts";
 export function FishIllustration({
   fish,
   locked = false,

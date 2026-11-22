@@ -1,4 +1,10 @@
-import type { Session, SpotId } from "../../../shared/types";
+import type { Session, SpotId } from "../../../shared/types.ts";
+const MODE_COLOR: Record<Session["mode"], string> = {
+  taut: "#f3f3df",
+  payout: "#e8c87a",
+  locked: "#e0815f",
+  slack: "#b7c9bd",
+};
 export function LakeScene({
   session,
   spot,
@@ -9,6 +15,12 @@ export function LakeScene({
   const active = ["waiting", "bite", "fighting"].includes(session.phase);
   const x = 460 + session.castPower * 160;
   const y = 250 - session.castPower * 50;
+  // 搏鱼时竿尖随弯曲量下沉，软竿弯得更明显。
+  const tipX = 528 - (session.phase === "fighting" ? session.bend * 26 : 0);
+  const tipY = 331 + (session.phase === "fighting" ? session.bend * 42 : 0);
+  const linePath = `M${tipX} ${tipY}Q${(tipX + x) / 2} ${
+    (tipY + y) / 2 - (session.mode === "slack" ? 26 : 0)
+  } ${x} ${y}`;
   return (
     <svg
       className={"lake-scene scene-" + spot}
@@ -93,8 +105,18 @@ export function LakeScene({
         fill="none"
         strokeWidth="4"
       />
-      <path d="M447 510L528 331" stroke="#3d5b59" strokeWidth="7" />
-      <path d="M455 494L528 331" stroke="#d2b279" strokeWidth="2" />
+      <path
+        d={`M447 510 Q${470 + (tipX - 528) * 0.4} ${420 + (tipY - 331) * 0.5} ${tipX} ${tipY}`}
+        stroke="#3d5b59"
+        strokeWidth="7"
+        fill="none"
+      />
+      <path
+        d={`M455 494 Q${478 + (tipX - 528) * 0.4} ${412 + (tipY - 331) * 0.5} ${tipX} ${tipY}`}
+        stroke="#d2b279"
+        strokeWidth="2"
+        fill="none"
+      />
       <circle
         cx="470"
         cy="466"
@@ -106,10 +128,14 @@ export function LakeScene({
       {active && (
         <>
           <path
-            d={`M528 331Q565 200 ${x} ${y}`}
+            d={linePath}
             fill="none"
-            stroke="#f3f3df"
-            strokeWidth="1.2"
+            stroke={
+              session.phase === "fighting"
+                ? MODE_COLOR[session.mode]
+                : "#f3f3df"
+            }
+            strokeWidth={session.mode === "locked" ? 1.8 : 1.2}
           />
           <g className={session.phase === "bite" ? "bobber biting" : "bobber"}>
             <ellipse

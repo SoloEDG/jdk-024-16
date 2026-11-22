@@ -1,4 +1,4 @@
-export { LakeScene } from "./ui/LakeScene";
-export { FishingPanel } from "./ui/FishingPanel";
-export { prepareCast } from "./lib/encounter";
-export { tickSession, strike } from "./model/session";
+export { LakeScene } from "./ui/LakeScene.tsx";
+export { FishingPanel } from "./ui/FishingPanel.tsx";
+export { prepareCast } from "./lib/encounter.ts";
+export { tickSession, strike } from "./model/session.ts";

@@ -1,4 +1,5 @@
-import type { GameDocument } from "../../../shared/types";
+import type { GameDocument } from "../../../shared/types.ts";
+import { countRodCatches } from "../../collection/lib/records.ts";
 export interface Challenge {
   id: string;
   name: string;
@@ -53,5 +54,23 @@ export const challenges: Challenge[] = [
     target: 3,
     reward: "护水徽章",
     measure: (d) => d.stats.released,
+  },
+  {
+    id: "soft-touch",
+    unlockAt: 1,
+    name: "以柔克刚",
+    description: "用软调竿上岸 3 尾，且判定峰值均不超过 60%",
+    target: 3,
+    reward: "柔弦徽章",
+    measure: (d) => countRodCatches(d.bag, "soft", 0, 0.6),
+  },
+  {
+    id: "hard-duel",
+    unlockAt: 3,
+    name: "硬竿对决",
+    description: "用硬调竿上岸 2 尾峰值达到 80% 的大鱼",
+    target: 2,
+    reward: "硬弓徽章",
+    measure: (d) => countRodCatches(d.bag, "hard", 0.8),
   },
 ];

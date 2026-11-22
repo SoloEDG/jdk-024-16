@@ -1,4 +1,4 @@
-import type { FishSpecies } from "./types";
+import type { FishSpecies } from "./types.ts";
 export const fishCatalog: FishSpecies[] = [
   {
     id: "crucian",

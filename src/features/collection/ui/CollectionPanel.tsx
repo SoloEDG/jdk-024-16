@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { BookOpen, Backpack, ArrowUpRight } from "lucide-react";
-import type { GameDocument } from "../../../shared/types";
-import type { Command } from "../../../shared/commands";
-import { fishCatalog, species } from "../../../shared/catalog";
-import { bagWeight } from "../lib/records";
-import { FishIllustration } from "./FishIllustration";
+import type { GameDocument } from "../../../shared/types.ts";
+import type { Command } from "../../../shared/commands.ts";
+import { fishCatalog, species } from "../../../shared/catalog.ts";
+import {
+  bagWeight,
+  peakForRod,
+  hasLegacyCatch,
+} from "../lib/records.ts";
+import { rodLabel } from "../../tackle/index.ts";
+import { ROD_ORDER, RODS } from "../../fishing/lib/physics.ts";
+import { FishIllustration } from "./FishIllustration.tsx";
 export function CollectionPanel({
   doc,
   send,
@@ -64,11 +70,36 @@ export function CollectionPanel({
               <strong>{fish.name}</strong>
               <em>{fish.latin}</em>
               <p>{fish.note}</p>
-              <small>
-                {doc.journal[fish.id]
-                  ? `捕获 ${doc.journal[fish.id]?.count} 尾 · 最大 ${doc.journal[fish.id]?.best.toFixed(2)} kg`
-                  : "尝试探索它偏爱的水域与鱼饵。"}
-              </small>
+              {doc.journal[fish.id] ? (
+                <>
+                  <small>
+                    捕获 {doc.journal[fish.id]?.count} 尾 · 最大{" "}
+                    {doc.journal[fish.id]?.best.toFixed(2)} kg
+                  </small>
+                  <ul className="rod-peak-list">
+                    {ROD_ORDER.map((rid) => {
+                      const peak = peakForRod(doc.bag, fish.id, rid);
+                      return (
+                        <li key={rid}>
+                          <span>{RODS[rid].name}</span>
+                          <em>
+                            {peak === null
+                              ? "暂无记录"
+                              : `判定峰值 ${Math.round(peak * 100)}%`}
+                          </em>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  {hasLegacyCatch(doc.bag, fish.id) && (
+                    <small className="legacy-note">
+                      含升级前的旧鱼获：重量保留，装备信息未知。
+                    </small>
+                  )}
+                </>
+              ) : (
+                <small>尝试探索它偏爱的水域与鱼饵。</small>
+              )}
             </div>
           )}
         </>
@@ -90,6 +121,16 @@ export function CollectionPanel({
               <span>
                 <strong>{species(c.fish).name}</strong>
                 <small>{c.weight.toFixed(2)} kg</small>
+                <small className="gear-line">
+                  {c.rod ? (
+                    <>
+                      {rodLabel(c.rod)} · 峰值{" "}
+                      {Math.round(c.peakTension * 100)}%
+                    </>
+                  ) : (
+                    <em className="legacy-gear">装备未知 · 旧鱼获</em>
+                  )}
+                </small>
               </span>
               <button
                 className="text-btn"

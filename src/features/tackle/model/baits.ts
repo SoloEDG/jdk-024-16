@@ -1,4 +1,4 @@
-import type { BaitId } from "../../../shared/types";
+import type { BaitId } from "../../../shared/types.ts";
 export const baits: {
   id: BaitId;
   name: string;

@@ -1,8 +1,8 @@
 import { Lock, MapPin, ArrowUpRight } from "lucide-react";
-import type { Command } from "../../../shared/commands";
-import type { GameDocument } from "../../../shared/types";
-import { waters } from "../model/waters";
-import { canVisit, habitatSummary } from "../lib/habitat";
+import type { Command } from "../../../shared/commands.ts";
+import type { GameDocument } from "../../../shared/types.ts";
+import { waters } from "../model/waters.ts";
+import { canVisit, habitatSummary } from "../lib/habitat.ts";
 export function WaterPanel({
   doc,
   busy,

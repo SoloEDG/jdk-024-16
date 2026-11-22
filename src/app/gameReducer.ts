@@ -1,18 +1,19 @@
-import type { Workspace } from "../shared/types";
-import type { Command } from "../shared/commands";
-import { idleSession, isBusy } from "../shared/initial";
-import { selectWater } from "../features/waters";
+import type { Workspace } from "../shared/types.ts";
+import type { Command } from "../shared/commands.ts";
+import { idleSession, isBusy } from "../shared/initial.ts";
+import { selectWater } from "../features/waters/index.ts";
 import {
   chooseBait,
+  chooseRod,
   tune,
   consumeBait,
   resupply,
   attraction,
   biteDelay,
-} from "../features/tackle";
-import { prepareCast, tickSession, strike } from "../features/fishing";
-import { landCatch, releaseCatch } from "../features/collection";
-import { claimReward } from "../features/challenges";
+} from "../features/tackle/index.ts";
+import { prepareCast, tickSession, strike } from "../features/fishing/index.ts";
+import { landCatch, releaseCatch } from "../features/collection/index.ts";
+import { claimReward } from "../features/challenges/index.ts";
 export function gameReducer(state: Workspace, c: Command): Workspace {
   const { doc, session: s } = state;
   const busy = isBusy(s);
@@ -21,10 +22,12 @@ export function gameReducer(state: Workspace, c: Command): Workspace {
       return busy ? state : { ...state, doc: selectWater(doc, c.id) };
     case "bait":
       return busy ? state : { ...state, doc: chooseBait(doc, c.id) };
-    case "power":
-      return { ...state, doc: tune(doc, "power", c.value) };
+    case "rod":
+      // 出竿前选竿；搏鱼中本次竿型已锁定。
+      return busy ? state : { ...state, doc: chooseRod(doc, c.id) };
     case "drag":
-      return busy ? state : { ...state, doc: tune(doc, "drag", c.value) };
+      // 泄力在搏鱼中也允许实时调整。
+      return { ...state, doc: tune(doc, "drag", c.value) };
     case "resupply":
       return busy
         ? state

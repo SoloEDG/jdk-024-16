@@ -1,7 +1,7 @@
-import type { Session, GameDocument } from "../../../shared/types";
-import { species } from "../../../shared/catalog";
-import { clamp } from "../../../shared/random";
-import { fightStep } from "../lib/physics";
+import type { Session, GameDocument } from "../../../shared/types.ts";
+import { species } from "../../../shared/catalog.ts";
+import { clamp } from "../../../shared/random.ts";
+import { fightStep } from "../lib/physics.ts";
 export function tickSession(
   s: Session,
   doc: GameDocument,
@@ -44,7 +44,10 @@ export function strike(s: Session): Session {
         ...s,
         phase: "fighting",
         clock: 0,
-        message: "按住收线；张力过高时松开，让鱼线歇一歇。",
+        mode: "taut",
+        tension: 0.2,
+        events: [{ t: 0, kind: "taut" }],
+        message: "按住收线；鱼冲刺时先弯竿、出线，峰值过高记得调松泄力。",
       }
     : s;
 }

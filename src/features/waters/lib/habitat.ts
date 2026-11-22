@@ -1,6 +1,6 @@
-import { fishCatalog } from "../../../shared/catalog";
-import type { GameDocument, SpotId } from "../../../shared/types";
-import { water } from "../model/waters";
+import { fishCatalog } from "../../../shared/catalog.ts";
+import type { GameDocument, SpotId } from "../../../shared/types.ts";
+import { water } from "../model/waters.ts";
 export function availableFish(spot: SpotId) {
   return fishCatalog.filter((f) => f.waters.includes(spot));
 }

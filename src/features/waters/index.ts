@@ -1,5 +1,5 @@
-export { WaterPanel } from "./ui/WaterPanel";
-export { WaterConditions } from "./ui/WaterConditions";
-export { water, waters } from "./model/waters";
-export { selectWater } from "./model/selection";
-export { availableFish } from "./lib/habitat";
+export { WaterPanel } from "./ui/WaterPanel.tsx";
+export { WaterConditions } from "./ui/WaterConditions.tsx";
+export { water, waters } from "./model/waters.ts";
+export { selectWater } from "./model/selection.ts";
+export { availableFish } from "./lib/habitat.ts";

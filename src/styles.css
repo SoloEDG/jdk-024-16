@@ -1565,3 +1565,178 @@ main {
     animation: notice-out 1ms 5s forwards !important;
   }
 }
+
+/* ===== 竿型选择与新搏鱼仪表 ===== */
+.rod-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 10px 0 16px;
+}
+.rod-card {
+  text-align: left;
+  padding: 9px 10px;
+  border-radius: 5px;
+  border: 1px solid #d6e0da;
+  background: #f2f5ef;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.rod-card.active {
+  border-color: #86a691;
+  background: #e6efe4;
+  box-shadow: inset 0 0 0 1px #86a691;
+}
+.rod-card:disabled {
+  opacity: 0.55;
+}
+.rod-card strong {
+  font-size: 11px;
+  font-weight: 600;
+  color: #466e63;
+}
+.rod-card small {
+  font-size: 8px;
+  line-height: 1.5;
+  color: #8b9b90;
+}
+.rod-drawing.rod-hard i:first-child {
+  background: #5d7268;
+  transform: rotate(-4deg);
+}
+.rod-drawing.rod-soft i:first-child {
+  transform: rotate(-10deg);
+}
+.fight-mode-row {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.mode-badge {
+  font-size: 9px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  color: #f7faf6;
+  background: #7f9b8c;
+  white-space: nowrap;
+}
+.mode-badge.mode-payout {
+  background: #c49a4e;
+}
+.mode-badge.mode-locked {
+  background: #c96a4b;
+}
+.mode-badge.mode-slack {
+  background: #9db3a5;
+}
+.rod-badge {
+  font-size: 9px;
+  color: #5d7a6d;
+  background: #e7efe7;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+.event-trail {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+.event {
+  font-style: normal;
+  font-size: 8px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: #eef3ec;
+  color: #6f8879;
+  display: inline-flex;
+  gap: 3px;
+  align-items: baseline;
+}
+.event small {
+  font-size: 7px;
+  color: #99a89c;
+}
+.event.event-locked,
+.event.event-overload,
+.event.event-break {
+  background: #f4e0d7;
+  color: #b4583c;
+}
+.event.event-payout {
+  background: #f2e8cf;
+  color: #9a7737;
+}
+.peak-line small {
+  float: right;
+  font-size: 8px;
+  color: #a08a78;
+  font-weight: 400;
+}
+.peak-bar[value] {
+  accent-color: #c47a54;
+}
+.dual-meters {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+}
+.dual-meters label {
+  font-size: 10px;
+}
+.spool[value] {
+  accent-color: #6f9b86;
+}
+.spool.empty[value] {
+  accent-color: #c96a4b;
+}
+.drag-inline {
+  grid-column: 1/-1;
+  border-top: 1px solid #e3eae3;
+  padding-top: 8px;
+}
+.drag-inline input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+}
+.rod-peak-list {
+  list-style: none;
+  margin: 8px 0 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.rod-peak-list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  background: #f1f5ef;
+  border-radius: 4px;
+  padding: 5px 8px;
+}
+.rod-peak-list em {
+  font-style: normal;
+  color: #7c9189;
+}
+.legacy-note {
+  color: #a98c63 !important;
+}
+.gear-line {
+  margin-top: 2px;
+}
+.legacy-gear {
+  color: #b0946c;
+  font-style: normal;
+}
+.catch-toast small {
+  display: block;
+  margin-left: 0 !important;
+  margin-top: 4px;
+  font-size: 9px;
+}

@@ -1,8 +1,8 @@
-import type { BaitId, SpotId } from "./types";
+import type { BaitId, SpotId, RodId } from "./types.ts";
 export type Command =
   | { type: "spot"; id: SpotId }
   | { type: "bait"; id: BaitId }
-  | { type: "power"; value: number }
+  | { type: "rod"; id: RodId }
   | { type: "drag"; value: number }
   | { type: "charge-start" }
   | { type: "cast" }

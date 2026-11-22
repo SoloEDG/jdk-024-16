@@ -1,8 +1,8 @@
 import { PackageOpen, RefreshCw, Check } from "lucide-react";
-import type { GameDocument } from "../../../shared/types";
-import type { Command } from "../../../shared/commands";
-import { baits } from "../model/baits";
-import { attraction } from "../lib/affinity";
+import type { GameDocument } from "../../../shared/types.ts";
+import type { Command } from "../../../shared/commands.ts";
+import { baits } from "../model/baits.ts";
+import { attraction } from "../lib/affinity.ts";
 export function BaitPanel({
   doc,
   busy,

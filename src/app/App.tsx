@@ -10,13 +10,13 @@ import {
   X,
   Compass,
 } from "lucide-react";
-import { isBusy } from "../shared/initial";
-import { WaterPanel, WaterConditions, water } from "../features/waters";
-import { BaitPanel, RigPanel } from "../features/tackle";
-import { LakeScene, FishingPanel } from "../features/fishing";
-import { CollectionPanel } from "../features/collection";
-import { ChallengePanel, TripStats } from "../features/challenges";
-import { useGame } from "./useGame";
+import { isBusy } from "../shared/initial.ts";
+import { WaterPanel, WaterConditions, water } from "../features/waters/index.ts";
+import { BaitPanel, RigPanel } from "../features/tackle/index.ts";
+import { LakeScene, FishingPanel } from "../features/fishing/index.ts";
+import { CollectionPanel } from "../features/collection/index.ts";
+import { ChallengePanel, TripStats } from "../features/challenges/index.ts";
+import { useGame } from "./useGame.ts";
 export function App() {
   const { state, send, saved } = useGame();
   const { doc, session } = state;
@@ -119,7 +119,12 @@ export function App() {
             </section>
             <div className="equipment-row">
               <BaitPanel doc={doc} busy={busy} send={send} />
-              <RigPanel doc={doc} busy={busy} send={send} />
+              <RigPanel
+                doc={doc}
+                busy={busy}
+                fighting={session.phase === "fighting"}
+                send={send}
+              />
             </div>
             <div className="journal-strip">
               <span>✳</span>
@@ -176,15 +181,18 @@ export function App() {
             <h2 id="guide-title">一竿，一次相遇。</h2>
             <ol>
               <li>
-                选择已开放的钓点，搭配鱼饵。不同水域和鱼饵会改变上钩鱼群。
+                选择已开放的钓点，搭配鱼饵，并在出竿前选好软调或硬调竿。不同水域和鱼饵会改变上钩鱼群。
               </li>
               <li>点击开始抛竿，再次点击确定力度，耐心等待浮漂跳动。</li>
               <li>看到咬钩提示后，在四秒内提竿。</li>
               <li>
-                按住收线，把鱼带到岸边。降低力度或松手可缓解张力；松线超过五秒会脱钩。键盘可按住空格或回车收线。
+                搏鱼时张力由竿梢弹性、鱼线延展和线杯余量共同决定：鱼冲刺先弯竿、再触发出线；软竿缓冲深但回鱼慢，硬竿回鱼快但峰值更高。
               </li>
               <li>
-                收获会保存到背包和图鉴。捕获两尾解锁溪流，五尾解锁深水。放流保留图鉴记录。
+                余线耗尽后会从出线切为硬受力，只有张力持续超过断线阈值才会断线；松弛的鱼线推不动鱼，松线超过五秒会脱钩。搏鱼中随时可调泄力，键盘可按住空格或回车收线。
+              </li>
+              <li>
+                收获会保存实际竿型与判定峰值到背包、图鉴和装备挑战；升级前的旧鱼获保留原重量并显示为装备未知。
               </li>
             </ol>
             <p>

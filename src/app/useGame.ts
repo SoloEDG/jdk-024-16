@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useRef, useState } from "react";
-import { idleSession } from "../shared/initial";
-import { gameReducer } from "./gameReducer";
-import { loadGame, saveGame } from "./storage";
+import { idleSession } from "../shared/initial.ts";
+import { gameReducer } from "./gameReducer.ts";
+import { loadGame, saveGame } from "./storage.ts";
 export function useGame() {
   const loaded = useRef<ReturnType<typeof loadGame> | null>(null);
   if (!loaded.current) loaded.current = loadGame();

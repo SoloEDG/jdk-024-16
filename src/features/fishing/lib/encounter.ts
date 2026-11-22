@@ -1,6 +1,6 @@
-import type { GameDocument, Session, FishSpecies } from "../../../shared/types";
-import { random } from "../../../shared/random";
-import { idleSession } from "../../../shared/initial";
+import type { GameDocument, Session, FishSpecies } from "../../../shared/types.ts";
+import { random } from "../../../shared/random.ts";
+import { idleSession } from "../../../shared/initial.ts";
 export function prepareCast(
   doc: GameDocument,
   charge: number,
@@ -21,11 +21,17 @@ export function prepareCast(
       phase: "waiting",
       spot: doc.spot,
       bait: doc.bait,
+      rod: doc.rod,
       castPower: charge,
       fish: chosen.id,
       weight:
         Math.round((chosen.min + (chosen.max - chosen.min) * size) * 100) / 100,
       biteAt: delay(wait) + (1 - charge) * 0.8,
+      spool: 1,
+      tension: 0.15,
+      mode: "slack",
+      physAcc: 0,
+      events: [],
       message: "浮漂已落水，留意湖面上的动静。",
     },
   };

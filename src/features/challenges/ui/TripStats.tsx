@@ -1,4 +1,4 @@
-import type { GameDocument } from "../../../shared/types";
+import type { GameDocument } from "../../../shared/types.ts";
 export function TripStats({ doc }: { doc: GameDocument }) {
   return (
     <div className="trip-stats">

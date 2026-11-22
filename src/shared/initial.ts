@@ -1,10 +1,10 @@
-import type { GameDocument, Session } from "./types";
+import type { GameDocument, Session } from "./types.ts";
 export function newDocument(): GameDocument {
   return {
     version: 1,
     spot: "reed",
     bait: "worm",
-    power: 0.6,
+    rod: "soft",
     drag: 0.4,
     seed: 48127,
     stock: { worm: 24, corn: 20, fly: 16 },
@@ -23,17 +23,24 @@ export function idleSession(): Session {
     castPower: 0,
     spot: "reed",
     bait: "worm",
+    rod: "soft",
     fish: null,
     weight: 0,
     biteAt: 2,
     progress: 0,
-    tension: 0.35,
+    tension: 0.15,
     energy: 1,
     slackTime: 0,
     overload: 0,
     peak: 0,
     reeling: false,
     duration: 0,
+    spool: 1,
+    stretch: 0,
+    bend: 0,
+    mode: "slack",
+    physAcc: 0,
+    events: [],
     message: "深呼吸，把时间交给湖面。",
   };
 }
